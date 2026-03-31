@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+@theme inline {
+  --font-serif:       var(--font-cormorant), "Georgia", serif;
+  --font-sans:        var(--font-dm-sans), system-ui, sans-serif;
+  --font-handwritten: var(--font-caveat), cursive;
+
+  /* Romantic Ivory & Champagne Palette */
+  --color-paper:        #fdfbf7;   /* luminous ivory base */
+  --color-paper-warm:   #f5f0e6;   /* soft champagne */
+  --color-card:         #ffffff;   /* pristine card face */
+  --color-card-alt:     #fcf7f7;   /* faint blush-tinted card */
+
+  /* Blush & Dusty Rose Accents */
+  --color-blush-soft:   #f9eaea;
+  --color-blush:        #e8cfcf;
+  --color-champagne:    #e8e0d5;
+  --color-rose:         #d99c9c;
+  --color-rose-deep:    #b57a7a;
+  --color-dusty-rose:   #9c6b6b;
+
+  /* Elegant Inks */
+  --color-ink:          #4a3b39;   /* deepest espresso/rose ink */
+  --color-ink-muted:    #826c69;
+  --color-ink-faint:    #b8a7a5;
+
+  /* Restrained Linework */
+  --color-line:         #ede5de;
+  --color-line-warm:    #dcd2cb;
+
+  /* Handcrafted Elements */
+  --color-tape-pink:    rgba(217, 156, 156, 0.35);
+  --color-tape-peach:   rgba(232, 224, 213, 0.65);
+  --color-gold:         #c9a051;
+}
+
+/* ─── Global Reset & Typography ─────────────────────────────────────────── */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  
+  /* Romantic Red Heart Emoji Cursor (Base64 Encoded for Safari/Chrome support) */
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCI+PHRleHQgeT0iMjQiIGZvbnQtc2l6ZT0iMjRweCI+4p2k77iPPC90ZXh0Pjwvc3ZnPg==") 14 14, auto !important;
+}
+
+/* Expand the heart slightly when hovering over clickable items! */
+a, button, [role="button"], label, input[type="submit"], .cursor-pointer {
+  cursor: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNCIgaGVpZ2h0PSIzNCI+PHRleHQgeT0iMzAiIGZvbnQtc2l6ZT0iMzBweCI+4p2k77iPPC90ZXh0Pjwvc3ZnPg==") 17 17, pointer !important;
+}
+
+/* ─── Textures & Atmosphere ─────────────────────────────────────────────── */
+
+/* 1. Authentic Paper Grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* 2. Dreamy Edge Vignette */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: radial-gradient(circle at center, transparent 40%, rgba(181, 122, 122, 0.04) 100%);
+}
+
+/* Ensure content sits between the grain and the vignette */
+body > * { 
+  position: relative; 
+  z-index: 1; 
+}
+
+/* ─── Hierarchy & Elements ──────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: normal; /* We let inline italic classes handle style */
+  color: var(--color-ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+::selection { 
+  background: var(--color-blush); 
+  color: var(--color-ink); 
+}
+
+/* Refined narrow scrollbars */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--color-champagne); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-rose); }
+
+/* ─── Custom Utilities ──────────────────────────────────────────────────── */
+@layer utilities {
+  .font-serif       { font-family: var(--font-serif); }
+  .font-sans        { font-family: var(--font-sans); }
+  .font-handwritten { font-family: var(--font-handwritten); }
+}
+
+/* Global Transition Defaults */
+button, a {
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
